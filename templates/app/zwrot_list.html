@@ -1,0 +1,91 @@
+{% extends 'app/base.html' %}
+{% block body_block %}
+{% if title %}
+<h1>{{title}}</h1>
+{% else %}
+<h1>Lista zwrotów</h1>
+{% endif %}
+<table class='table text-white'>
+    <tr>
+        <th>Imie</th>
+        <th>Nazwisko</th>
+        <th>Telefon</th>
+        <th>Towar</th>
+        <th>Paragon</th>
+        <th>Faktura</th>
+        <th>Cena zakupu</th>
+        <th>Powód zwrotu</th>
+        <th>Dane do zwrotu</th>
+        <th>Data przyjęcia</th>
+        <th>Data zwrotu pieniędzy</th>
+    </tr>
+    {% for zwrot in zwroty_list %}
+        <tr>
+            <td>
+                {% if zwrot.id %}
+                    <a class='text-light' href="{%url "edit" pk=zwrot.id %}">{{zwrot.imie}}</a>
+                {% else %}
+                    {{zwrot.imie}}  
+                {% endif %}
+            </td>
+            <td>{{zwrot.nazwisko}}</td>
+            <td>{{zwrot.telefon}}</td>
+            <td>{{zwrot.towar}}</td>
+            <td>
+                {% if zwrot.paragon %}
+                    <img src="/static/admin/img/icon-yes.svg" alt="True">
+                {% else %}
+                    <img src="/static/admin/img/icon-no.svg" alt="False">
+                {% endif %}
+            </td>
+            <td>
+                {% if zwrot.faktura %}
+                    <img src="/static/admin/img/icon-yes.svg" alt="True">
+                {% else %}
+                    <img src="/static/admin/img/icon-no.svg" alt="False">
+                {% endif %}
+            </td>
+            <td>{{zwrot.cena_zakupu}}</td>
+            <td>{{zwrot.powod_zwrotu}}</td>
+            <td>
+                {% if zwrot.dane_do_zwrotu %}
+                    <img src="/static/admin/img/icon-yes.svg" alt="True">
+                    {{zwrot.numer_konta}}
+                {% else %}
+                    <img src="/static/admin/img/icon-no.svg" alt="False">
+                {% endif %} 
+                </td>
+            <td>{{zwrot.data_odebrania_towaru}}</td>
+            <td>
+                {% if zwrot.data_zwrotu_pieniedzy %}
+                    <img src="/static/admin/img/icon-yes.svg" alt="True">
+                    {{zwrot.data_zwrotu_pieniedzy}}
+                {% else %}
+                    <img src="/static/admin/img/icon-no.svg" alt="False">
+                {% endif %}
+            </td>
+        </tr>
+    {% endfor %}
+</table>
+
+{% if zwroty_list.number %}
+    <div class="pagination">
+        <span class="step-links">
+            {% if zwroty_list.has_previous %}
+                <a href="?page=1" >&laquo; 1</a>
+                <a href="?page={{ zwroty_list.previous_page_number }}">Poprzednia</a>
+            {% endif %}
+
+            <span class="current">
+                Strona {{ zwroty_list.number }} z {{ zwroty_list.paginator.num_pages }}.
+            </span>
+
+            {% if zwroty_list.has_next %}
+                <a href="?page={{ zwroty_list.next_page_number }}">Następna</a>
+                <a href="?page={{ zwroty_list.paginator.num_pages }}">{{ zwroty_list.paginator.num_pages }} &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+{% endif %}
+
+{% endblock body_block %}

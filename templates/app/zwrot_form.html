@@ -1,0 +1,62 @@
+{% extends 'app/base.html' %} {% load crispy_forms_tags %} {% load poll_extras%}
+{% block body_block%}
+<div class="container">
+  <form class="form" method="POST">
+    {% csrf_token %}
+    <div class="row">
+      <div class="col">
+        <label for="imie">Imie</label>
+        {{ form.imie|add_classes:" textinput textInput bg-black text-white form-control"}}
+      </div>
+      <div class="col">
+        <label for="nazwisko">Nazwisko</label>
+        {{ form.nazwisko|add_classes:"bg-black text-white form-control"}}
+      </div
+      <div class="col">
+        <label for="telefon">Telefon</label>
+        {{ form.telefon|add_classes:"bg-black text-white form-control"}}
+      </div>
+      <div class="col">
+        <label for="towar">Towar</label>
+        {{ form.towar|add_classes:"bg-black text-white form-control"}}
+      </div>
+      <div class="col">
+        <label for="paragon">Paragon</label>
+        {{ form.paragon|add_classes:"bg-black text-white form-check-input"}}
+      </div>
+      <div class="col">
+        <label for="faktura">Faktura</label>
+        {{ form.faktura|add_classes:"bg-black text-white form-check-input"}}
+      </div>
+      <div class="col">
+        <label for="cena_zakupu">Cena zakupu</label>
+        {{ form.cena_zakupu|add_classes:"bg-black text-white form-control"}}
+      </div>
+      <div class="col">
+        <label for="dane_do_zwrotu">Dane do zwrotu</label>
+        {{ form.dane_do_zwrotu|add_classes:"bg-black text-white form-check-input"}}
+      </div>
+      <div class="col">
+        <label for="powod_zwrotu">Powód zwrotu</label>
+        {{ form.powod_zwrotu|add_classes:"bg-black text-white form-control"}}
+      </div>
+      <div class="col">
+        <label for="numer_konta">Numer konta</label>
+        {{ form.numer_konta|add_classes:"bg-black text-white form-control"}}
+      </div>
+      <div class="col">
+        <label for="data_odebrania_towaru">Data odebrania towaru</label>
+        {{ form.data_odebrania_towaru|add_classes:"form-control bg-black text-white"}}
+      </div>
+      <div class="col">
+        <label for="data_zwrotu_pieniedzy">Data zwrotu pieniędzy</label>
+        {{ form.data_zwrotu_pieniedzy|add_classes:"form-control bg-black text-white"}}
+      </div>
+      <div class="col">
+        <input class="btn btn-primary" type="submit" value="Zapisz">
+      </div>
+    </div>
+  </form>
+</div>
+
+{% endblock body_block %}
